@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QMessageBox
 import window
 
 
-class ExampleApp(QtWidgets.QMainWindow, window.Ui_mainWindow):
+class App(QtWidgets.QMainWindow, window.Ui_mainWindow):
 
     def __init__(self):
         super().__init__()
@@ -118,29 +118,29 @@ class ExampleApp(QtWidgets.QMainWindow, window.Ui_mainWindow):
             index_state = []
 
             for i in table_keys:
-                if self.comboBox_2.currentIndex() is 0:
+                if self.comboBox_2.currentIndex() == 0:
                     index_type.append(i)
                 else:
                     tmp = load_printers[i]['type']
-                    if tmp.find(self.comboBox_2.currentText()) is not -1:
+                    if tmp.find(self.comboBox_2.currentText()) != -1:
                         index_type.append(i)
                 tmp = load_printers[i]['made']
                 if self.checkBox_made.isChecked():
-                    if tmp.find(self.lineEdit_made.text()) is not -1:
+                    if tmp.find(self.lineEdit_made.text()) != -1:
                         index_made.append(i)
                 else:
                     index_made.append(i)
                 tmp = load_printers[i]['model']
                 if self.checkBox_model.isChecked():
-                    if tmp.find(self.lineEdit_model.text()) is not -1:
+                    if tmp.find(self.lineEdit_model.text()) != -1:
                         index_model.append(i)
                 else:
                     index_model.append(i)
-                if self.comboBox.currentIndex() is 0:
+                if self.comboBox.currentIndex() == 0:
                     index_state.append(i)
                 else:
                     tmp = load_printers[i]['state']
-                    if tmp.find(self.comboBox.currentText()) is not -1:
+                    if tmp.find(self.comboBox.currentText()) != -1:
                         index_state.append(i)
 
             index = [index_type] + [index_made] + [index_model] + [index_state]
@@ -158,7 +158,7 @@ class ExampleApp(QtWidgets.QMainWindow, window.Ui_mainWindow):
         if self.lineEdit_room in index:
             del hr[self.lineEdit_room.text()]
 
-        if self.lineEdit_room.text() is not "":
+        if self.lineEdit_room.text() != "":
             hr.setdefault(self.lineEdit_room.text(),
                           {'name': self.lineEdit_human.text(),
                            'phone': self.lineEdit_phone.text()
@@ -193,7 +193,7 @@ class ExampleApp(QtWidgets.QMainWindow, window.Ui_mainWindow):
             self.lineEdit_data_rem.setText("")
             self.lineEdit_error.setText("")
 
-        if self.lineEdit_ser_num.text() is not "":
+        if self.lineEdit_ser_num.text() == "":
             printers.setdefault(self.lineEdit_ser_num.text(),
                                 {'type': self.comboBox_2.currentText(),
                                  'made': self.lineEdit_made.text(),
@@ -381,7 +381,7 @@ class ExampleApp(QtWidgets.QMainWindow, window.Ui_mainWindow):
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    a = ExampleApp()
+    a = App()
     a.show()
     app.exec_()
 
